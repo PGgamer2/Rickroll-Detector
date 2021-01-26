@@ -20,6 +20,12 @@ function isThisArickroll(rickLink) {
 	var rickYTid = youtubeParser(rickLink);
 	readJSONfile("rickrolls.json", function(text){
 		var totalLinks = JSON.parse(text);
+		
+		if (totalLinks == false) {
+			document.getElementById("rickornot").innerHTML = "Weird, it seems like this isn't a YouTube URL...";
+			document.getElementById("rickornot").style.color = "white";
+		}
+		
 		for (var i = 0; i < totalLinks.YouTube.length; i++) {
 			if (rickYTid == youtubeParser(totalLinks.YouTube[i])) {
 				document.getElementById("rickornot").innerHTML = "A Rickroll has been detected!";
