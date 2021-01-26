@@ -21,7 +21,7 @@ function isThisArickroll(rickLink) {
 	readJSONfile("rickrolls.json", function(text){
 		var totalLinks = JSON.parse(text);
 		
-		if (totalLinks == false) {
+		if (rickYTid == false) {
 			document.getElementById("rickornot").innerHTML = "Weird, it seems like this isn't a YouTube URL...";
 			document.getElementById("rickornot").style.color = "white";
 			return;
