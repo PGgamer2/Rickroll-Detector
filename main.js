@@ -19,7 +19,7 @@ function youtubeParser(url) {
 function isThisArickroll(rickLink) {
 	if (!rickLink) return;
 	var rickYTid = youtubeParser(rickLink);
-	readJSONfile("rickrolls.json", function(text){
+	readJSONfile("https://raw.githubusercontent.com/PGgamer2/Rickroll-Detector/main/rickrolls.json", function(text){
 		var totalLinks = JSON.parse(text);
 		
 		for (var i = 0; i < totalLinks.YouTube.length; i++) {
