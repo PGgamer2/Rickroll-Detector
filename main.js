@@ -17,6 +17,7 @@ function youtubeParser(url) {
 }
 
 function isThisArickroll(rickLink) {
+	if (!rickLink) return;
 	var rickYTid = youtubeParser(rickLink);
 	readJSONfile("rickrolls.json", function(text){
 		var totalLinks = JSON.parse(text);
@@ -34,7 +35,3 @@ function isThisArickroll(rickLink) {
 		document.getElementById("rickornot").style.color = "white";
 	});
 }
-
-document.getElementById("rickbutton").addEventListener("click", function() {
-	isThisArickroll(document.getElementById("rickLinkInput").value);
-});
