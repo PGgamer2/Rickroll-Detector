@@ -24,6 +24,7 @@ function isThisArickroll(rickLink) {
 		if (totalLinks == false) {
 			document.getElementById("rickornot").innerHTML = "Weird, it seems like this isn't a YouTube URL...";
 			document.getElementById("rickornot").style.color = "white";
+			return;
 		}
 		
 		for (var i = 0; i < totalLinks.YouTube.length; i++) {
