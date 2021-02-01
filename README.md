@@ -10,3 +10,6 @@ Everybody knows what it is. There's also a [Wikipedia](https://wikipedia.org/wik
 
 ### It doesn't detect *this* link! Can you add it?
 Sure. Report it in the issue tab or make a PR.
+
+### How does it work?
+It basically detects if the video's ID is inside a "blacklist" contained inside *rickrolls.json*. Then it checks if the video's author is between another blacklist and after that, if nothing has been detected, it checks if the video's description and title contain the word "rickroll".
