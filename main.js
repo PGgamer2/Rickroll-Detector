@@ -71,7 +71,7 @@ function DisplayRickRoll() {
 			document.getElementById("rickornot").style.color = "red";
 			break;
 		case 2:
-			document.getElementById("rickornot").innerHTML = "Maybe this is a Rickroll.\n<i>But I'm not sure...</i>";
+			document.getElementById("rickornot").innerHTML = "Maybe this is a Rickroll. <i>But I'm not sure...</i>";
 			document.getElementById("rickornot").style.color = "yellow";
 			break;
 		default:
