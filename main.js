@@ -27,7 +27,7 @@ function isThisArickroll(rickLink) {
 	readJSONfile("https://raw.githubusercontent.com/PGgamer2/Rickroll-Detector/main/rickrolls.json", function(text) {
 		var totalLinks = JSON.parse(text);
 		
-		// Check if video ID is between these ones
+		// Check if video's ID is between these ones
 		if (typeof(rickYTid) == 'string') {
 			for (var i = 0; i < totalLinks.YouTube.Video.length; i++) {
 				if (rickYTid == youtubeParser(totalLinks.YouTube.Video[i])) {
@@ -40,7 +40,7 @@ function isThisArickroll(rickLink) {
 			readJSONfile("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + rickYTid + "&key=" + atob(YTapiKey), function(text) {
 				var videoInfos = JSON.parse(text);
 				
-				// Check if video author is between these ones
+				// Check if video's author is between these ones
 				for (var i = 0; i < totalLinks.YouTube.Channel.length; i++) {
 					if (totalLinks.YouTube.Channel[i] == videoInfos.items[0].snippet.channelId) {
 						RickDetected = 1;
@@ -75,7 +75,7 @@ function DisplayRickRoll() {
 			document.getElementById("rickornot").style.color = "yellow";
 			break;
 		default:
-			document.getElementById("rickornot").innerHTML = "This URL seems Rick-free! You're safe.";
+			document.getElementById("rickornot").innerHTML = "This URL seems Rickroll-free! You're safe.";
 			document.getElementById("rickornot").style.color = "white";
 			break;
 	}
