@@ -1,4 +1,4 @@
-# Rickroll Detector
+# [Rickroll Detector](https://pggamer2.github.io/Rickroll-Detector/)
 Detect any Rickroll in some seconds!
 
 *I had to Rickroll myself multiple times to make this*.
