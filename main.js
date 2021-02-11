@@ -48,11 +48,11 @@ function isThisArickroll(rickLink) {
 				}
 				
 				// Check if title contains the rickroll word
-				if (RickDetected == 0 && videoInfos.items[0].snippet.title.replace(/ /g, '').toLowerCase().includes("rickroll")) {
+				if (RickDetected == 0 && videoInfos.items[0].snippet.title.replace(/ /g, '').toLowerCase().indexOf("rickroll") !== -1) {
 					RickDetected = 2;
 				}
 				// Check if description contains the rickroll word
-				if (RickDetected == 0 && videoInfos.items[0].snippet.description.replace(/ /g, '').toLowerCase().includes("rickroll")) {
+				if (RickDetected == 0 && videoInfos.items[0].snippet.description.replace(/ /g, '').toLowerCase().indexOf("rickroll") !== -1) {
 					RickDetected = 2;
 				}
 				
