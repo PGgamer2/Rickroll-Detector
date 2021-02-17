@@ -1,5 +1,6 @@
 const YTapiKey = "QUl6YVN5QnRNVkdMcVgzemdvMWdLV3FTNE9naW1FLXM2TDhxbGtr";
 var RickDetected = 0;
+var gbytID;
 
 function readJSONfile(file, callback) {
     var rawFile = new XMLHttpRequest();
@@ -24,11 +25,12 @@ function isThisArickroll(rickLink) {
 	if (!rickLink) return;
 	RickDetected = 0;
 	var rickYTid = youtubeParser(rickLink);
+	if (typeof(rickYTid) != 'string') RickDetected = -1;
 	readJSONfile("https://raw.githubusercontent.com/PGgamer2/Rickroll-Detector/main/rickrolls.json", function(text) {
 		var totalLinks = JSON.parse(text);
 		
 		// Check if video's ID is between these ones
-		if (typeof(rickYTid) == 'string') {
+		if (RickDetected != -1) {
 			for (var i = 0; i < totalLinks.YouTube.Video.length; i++) {
 				if (rickYTid == youtubeParser(totalLinks.YouTube.Video[i])) {
 					RickDetected = 1;
@@ -36,7 +38,7 @@ function isThisArickroll(rickLink) {
 			}
 		}
 		
-		if (typeof(rickYTid) == 'string' && RickDetected == 0) {
+		if (RickDetected == 0) {
 			readJSONfile("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + rickYTid + "&key=" + atob(YTapiKey), function(text) {
 				var videoInfos = JSON.parse(text);
 				
@@ -56,27 +58,37 @@ function isThisArickroll(rickLink) {
 					RickDetected = 2;
 				}
 				
-				DisplayRickRoll();
+				DisplayRickRoll(rickYTid);
 			});
 		} else {
-			DisplayRickRoll();
+			DisplayRickRoll(rickYTid);
 		}
 	});
 }
 
-function DisplayRickRoll() {
+function DisplayRickRoll(ytID) {
+	gbytID = ytID;
 	switch (RickDetected) {
 		case 1:
 			document.getElementById("rickornot").innerHTML = "A Rickroll has been detected!";
 			document.getElementById("rickornot").style.color = "red";
+			document.getElementById("addToHistory").style.display = "none";
+			addToHistory(ytID);
 			break;
 		case 2:
 			document.getElementById("rickornot").innerHTML = "Maybe this is a Rickroll. <i>But I'm not sure...</i>";
 			document.getElementById("rickornot").style.color = "yellow";
+			document.getElementById("addToHistory").style.display = "initial";
 			break;
-		default:
+		case 0:
 			document.getElementById("rickornot").innerHTML = "This URL seems Rickroll-free! You're safe.";
+			document.getElementById("rickornot").style.color = "lightgreen";
+			document.getElementById("addToHistory").style.display = "initial";
+			break;
+		case -1:
+			document.getElementById("rickornot").innerHTML = "This isn't a valid YouTube URL!";
 			document.getElementById("rickornot").style.color = "white";
+			document.getElementById("addToHistory").style.display = "none";
 			break;
 	}
 }
