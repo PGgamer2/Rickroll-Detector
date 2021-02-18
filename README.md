@@ -13,3 +13,4 @@ Sure. Report it in the issue tab or make a PR.
 
 ### How does it work?
 It basically detects if the video's ID is inside a "blacklist" contained inside *rickrolls.json*. Then it checks if the video's author is between another blacklist and after that, if nothing has been detected, it checks if the video's description and title contain the word "rickroll".
+Also, I added a "history" of previous rickrolls that have been detected by the user. These are stored using cookies.
