@@ -1,6 +1,6 @@
 const YTapiKey = "QUl6YVN5QnRNVkdMcVgzemdvMWdLV3FTNE9naW1FLXM2TDhxbGtr";
 var RickDetected = 0;
-var gbytID;
+var lastYTid;
 
 function readJSONfile(file, callback) {
     var rawFile = new XMLHttpRequest();
@@ -30,9 +30,14 @@ function isThisArickroll(rickLink) {
 		var totalLinks = JSON.parse(text);
 		
 		// Check if video's ID is between these ones
-		if (RickDetected != -1) {
+		if (RickDetected == 0) {
 			for (var i = 0; i < totalLinks.YouTube.Video.length; i++) {
 				if (rickYTid == youtubeParser(totalLinks.YouTube.Video[i])) {
+					RickDetected = 1;
+				}
+			}
+			for (var i = 0; i < rickrollHistory.length; i++) {
+				if (rickYTid == youtubeParser(rickrollHistory[i])) {
 					RickDetected = 1;
 				}
 			}
@@ -67,7 +72,7 @@ function isThisArickroll(rickLink) {
 }
 
 function DisplayRickRoll(ytID) {
-	gbytID = ytID;
+	lastYTid = ytID;
 	switch (RickDetected) {
 		case 1:
 			document.getElementById("rickornot").innerHTML = "A Rickroll has been detected!";

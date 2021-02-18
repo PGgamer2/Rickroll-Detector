@@ -30,17 +30,17 @@ function updateHistoryHTML() {
 	else
 	{
 		document.getElementById("rickrollhistoryLabel").style.display = "initial";
-		rickrollHistory.forEach(function(item) {
+		for (var i = 0; i < rickrollHistory.length; i++) {
 			var pelem = document.createElement("p");
-			var nodeURL = document.createTextNode(item);
+			var nodeURL = document.createTextNode(rickrollHistory[i]);
 			var nodeRemButton = document.createElement("button");
 			nodeRemButton.style.marginLeft = "10px";
 			nodeRemButton.innerHTML = "-";
-			nodeRemButton.setAttribute( "onclick", "javascript: removeFromHistory('" + item + "');" );
+			nodeRemButton.setAttribute( "onclick", "javascript: removeFromHistory('" + rickrollHistory[i] + "');" );
 			pelem.appendChild(nodeURL);
 			pelem.appendChild(nodeRemButton);
 			listNode.appendChild(pelem);
-		});
+		}
 	}
 }
 
