@@ -3,24 +3,24 @@ var RickDetected = 0;
 var lastYTid;
 
 function readJSONfile(file, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
+	var rawFile = new XMLHttpRequest();
+	rawFile.overrideMimeType("application/json");
+	rawFile.open("GET", file, true);
+	rawFile.onreadystatechange = function() {
+		if (rawFile.readyState === 4 && rawFile.status == "200") {
+			callback(rawFile.responseText);
+		}
 		else if (parseInt(rawFile.status) >= 400) {
 			callback(parseInt(rawFile.status));
 		}
-    }
-    rawFile.send(null);
+	}
+	rawFile.send(null);
 }
 
 function youtubeParser(url) {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    var match = url.match(regExp);
-    return (match&&match[7].length==11)? match[7] : false;
+	var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+	var match = url.match(regExp);
+	return (match&&match[7].length==11)? match[7] : false;
 }
 
 function isThisArickroll(rickLink) {
