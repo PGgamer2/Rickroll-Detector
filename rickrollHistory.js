@@ -1,10 +1,12 @@
 var rickrollHistory = [];
-try { rickrollHistory = JSON.parse(getCookie("rickrollHistory")); } catch {}
+try { rickrollHistory = JSON.parse(getCookie("rickrollHistory")); } catch (error) {}
 updateHistoryHTML();
 
 function setCookie(name, value) {
 	document.cookie = name + "=" + value + ";";
 }
+
+Array.prototype.includes = function (elt) { return this.indexOf(elt) !== -1; }
 
 function getCookie(c_name) {
 	if (document.cookie.length > 0) {

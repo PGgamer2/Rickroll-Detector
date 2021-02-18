@@ -7,11 +7,13 @@ function readJSONfile(file, callback) {
 	rawFile.overrideMimeType("application/json");
 	rawFile.open("GET", file, true);
 	rawFile.onreadystatechange = function() {
-		if (rawFile.readyState === 4 && rawFile.status == "200") {
-			callback(rawFile.responseText);
-		}
-		else if (parseInt(rawFile.status) >= 400) {
-			callback(parseInt(rawFile.status));
+		if (rawFile.readyState === 4) {
+			if (rawFile.status == "200") {
+				callback(rawFile.responseText);
+			}
+			else if (parseInt(rawFile.status) >= 400) {
+				callback(parseInt(rawFile.status));
+			}
 		}
 	}
 	rawFile.send(null);
@@ -83,7 +85,7 @@ function isThisArickroll(rickLink) {
 						RickDetected = 2;
 					}
 				}
-				catch {
+				catch (error) {
 					RickDetected = -1;
 				}
 				
@@ -107,12 +109,12 @@ function DisplayRickRoll(ytID) {
 		case 2:
 			document.getElementById("rickornot").innerHTML = "Maybe this is a Rickroll. <i>But I'm not sure...</i>";
 			document.getElementById("rickornot").style.color = "yellow";
-			document.getElementById("addToHistory").style.display = "initial";
+			document.getElementById("addToHistory").style.display = "";
 			break;
 		case 0:
 			document.getElementById("rickornot").innerHTML = "This URL seems Rickroll-free! You're safe.";
 			document.getElementById("rickornot").style.color = "lightgreen";
-			document.getElementById("addToHistory").style.display = "initial";
+			document.getElementById("addToHistory").style.display = "";
 			break;
 		case -1:
 			document.getElementById("rickornot").innerHTML = "This isn't a valid YouTube URL!";
