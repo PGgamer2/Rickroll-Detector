@@ -34,11 +34,13 @@ function isThisArickroll(rickLink) {
 			for (var i = 0; i < totalLinks.YouTube.Video.length; i++) {
 				if (rickYTid == youtubeParser(totalLinks.YouTube.Video[i])) {
 					RickDetected = 1;
+					break;
 				}
 			}
 			for (var i = 0; i < rickrollHistory.length; i++) {
 				if (rickYTid == youtubeParser(rickrollHistory[i])) {
 					RickDetected = 1;
+					break;
 				}
 			}
 		}
@@ -51,6 +53,7 @@ function isThisArickroll(rickLink) {
 				for (var i = 0; i < totalLinks.YouTube.Channel.length; i++) {
 					if (totalLinks.YouTube.Channel[i] == videoInfos.items[0].snippet.channelId) {
 						RickDetected = 1;
+						break;
 					}
 				}
 				
