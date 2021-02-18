@@ -1,5 +1,5 @@
 var rickrollHistory = [];
-rickrollHistory = JSON.parse(getCookie("rickrollHistory"));
+try { rickrollHistory = JSON.parse(getCookie("rickrollHistory")); } catch {}
 updateHistoryHTML();
 
 function setCookie(name, value) {
