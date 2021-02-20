@@ -6,8 +6,6 @@ function setCookie(name, value) {
 	document.cookie = name + "=" + value + ";";
 }
 
-Array.prototype.includes = function (elt) { return this.indexOf(elt) !== -1; }
-
 function getCookie(c_name) {
 	if (document.cookie.length > 0) {
 		c_start = document.cookie.indexOf(c_name + "=");
@@ -58,7 +56,7 @@ function removeFromHistory(url) {
 
 function addToHistory(ytID) {
 	var url = "https://youtu.be/" + ytID;
-	if (!rickrollHistory.includes(url)) rickrollHistory.push(url);
+	if (rickrollHistory.indexOf(url) === -1) rickrollHistory.push(url);
 	
 	setCookie("rickrollHistory", JSON.stringify(rickrollHistory));
 	updateHistoryHTML();

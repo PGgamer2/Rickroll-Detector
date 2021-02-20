@@ -76,12 +76,15 @@ function isThisArickroll(rickLink) {
 						}
 					}
 					
-					// Check if title contains the rickroll word
-					if (RickDetected == 0 && videoInfos.items[0].snippet.title.replace(/ /g, '').toLowerCase().indexOf("rickroll") !== -1) {
+					var vidTitle = videoInfos.items[0].snippet.title.replace(/ /g, '').toLowerCase();
+					var vidDescription = videoInfos.items[0].snippet.description.replace(/ /g, '').toLowerCase();
+					
+					// Check if title contains these words
+					if (RickDetected == 0 && (vidTitle.indexOf("rickroll") !== -1 || vidTitle.indexOf("nevergonnagiveyouup") !== -1)) {
 						RickDetected = 2;
 					}
-					// Check if description contains the rickroll word
-					if (RickDetected == 0 && videoInfos.items[0].snippet.description.replace(/ /g, '').toLowerCase().indexOf("rickroll") !== -1) {
+					// Check if description contains these words
+					if (RickDetected == 0 && (vidDescription.indexOf("rickroll") !== -1 || vidDescription.indexOf("nevergonnagiveyouup") !== -1)) {
 						RickDetected = 2;
 					}
 				}
