@@ -20,9 +20,13 @@ function readJSONfile(file, callback) {
 }
 
 function youtubeParser(url) {
-	var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+	var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(shorts\/)|(watch\?))\??v?=?([^#&?]*).*/;
 	var match = url.match(regExp);
-	return (match&&match[7].length==11)? match[7] : false;
+	if (match) {
+		if (typeof match[7] !== 'undefined' && match[7].length==11) return match[7];
+		if (typeof match[8] !== 'undefined' && match[8].length==11) return match[8];
+	}
+	return false;
 }
 
 function isThisArickroll(rickLink) {
