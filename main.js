@@ -110,7 +110,7 @@ function DisplayRickRoll(ytID) {
 			addToHistory(ytID);
 			break;
 		case 2:
-			document.getElementById("rickornot").innerHTML = "Maybe this is a Rickroll. <i>But I'm not sure...</i>";
+			document.getElementById("rickornot").innerHTML = "This is probably a Rickroll.";
 			document.getElementById("rickornot").style.color = "yellow";
 			document.getElementById("addToHistory").style.display = "";
 			break;
