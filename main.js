@@ -10,8 +10,7 @@ function readJSONfile(file, callback) {
 		if (rawFile.readyState === 4) {
 			if (rawFile.status == "200") {
 				callback(rawFile.responseText);
-			}
-			else if (parseInt(rawFile.status) >= 400) {
+			} else if (parseInt(rawFile.status) >= 400) {
 				callback(parseInt(rawFile.status));
 			}
 		}
@@ -39,8 +38,7 @@ function isThisArickroll(rickLink) {
 		var totalLinks;
 		if (typeof(callback) != 'string') {
 			RickDetected = -3;
-		}
-		else totalLinks = JSON.parse(callback);
+		} else totalLinks = JSON.parse(callback);
 		
 		// Check if video's ID is between these ones
 		if (RickDetected == 0) {
@@ -62,12 +60,10 @@ function isThisArickroll(rickLink) {
 			readJSONfile("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + rickYTid + "&key=" + atob(YTapiKey), function(callback) {
 				var videoInfos;
 				if (typeof(callback) != 'string') {
-					if (callback == 403)
-						RickDetected = -2;
-					else
-						RickDetected = -1;
-				}
-				else videoInfos = JSON.parse(callback);
+					if (callback == 403) {
+						RickDetected = -2; // YT quota exceeded
+					} else RickDetected = -1;
+				} else videoInfos = JSON.parse(callback);
 				
 				try {
 					// Check if video's author is between these ones
@@ -80,19 +76,19 @@ function isThisArickroll(rickLink) {
 						}
 					}
 					
-					var vidTitle = videoInfos.items[0].snippet.title.replace(/ /g, '').toLowerCase();
-					var vidDescription = videoInfos.items[0].snippet.description.replace(/ /g, '').toLowerCase();
-					
-					// Check if title contains these words
-					if (RickDetected == 0 && (vidTitle.indexOf("rickroll") !== -1 || vidTitle.indexOf("nevergonnagiveyouup") !== -1)) {
-						RickDetected = 2;
+					if (RickDetected == 0) {
+						var vidTitle = videoInfos.items[0].snippet.title.replace(/ /g, '').toLowerCase();
+						var vidDescription = videoInfos.items[0].snippet.description.replace(/ /g, '').toLowerCase();
+						
+						if (vidTitle.indexOf("rickroll") !== -1 || vidTitle.indexOf("nevergonnagiveyouup") !== -1) {
+							// Check if title contains any combination of "nevergonnagiveyouup"
+							RickDetected = 2;
+						} else if (vidDescription.indexOf("rickroll") !== -1 || vidDescription.indexOf("nevergonnagiveyouup") !== -1) {
+							// Check if description contains any combination of "nevergonnagiveyouup"
+							RickDetected = 2;
+						}
 					}
-					// Check if description contains these words
-					if (RickDetected == 0 && (vidDescription.indexOf("rickroll") !== -1 || vidDescription.indexOf("nevergonnagiveyouup") !== -1)) {
-						RickDetected = 2;
-					}
-				}
-				catch (error) {
+				} catch (error) {
 					RickDetected = -1;
 				}
 				
@@ -104,39 +100,26 @@ function isThisArickroll(rickLink) {
 	});
 }
 
+const resultMessages = [["This URL seems Rickroll-free! You're safe.", "lightgreen"],
+						["A Rickroll has been detected!", "red"],
+						["This is probably a Rickroll.", "yellow"]];
+const errorsMessages = [["This isn't a valid YouTube URL!", "white"],
+						["YouTube quota has been exceeded. Try again later.", "purple"],
+						["An error has occurred! Cannot get the blacklist.", "violet"]];
 function DisplayRickRoll(ytID) {
 	lastYTid = ytID;
-	switch (RickDetected) {
-		case 1:
-			document.getElementById("rickornot").innerHTML = "A Rickroll has been detected!";
-			document.getElementById("rickornot").style.color = "red";
-			document.getElementById("addToHistory").style.display = "none";
-			addToHistory(ytID);
-			break;
-		case 2:
-			document.getElementById("rickornot").innerHTML = "This is probably a Rickroll.";
-			document.getElementById("rickornot").style.color = "yellow";
-			document.getElementById("addToHistory").style.display = "";
-			break;
-		case 0:
-			document.getElementById("rickornot").innerHTML = "This URL seems Rickroll-free! You're safe.";
-			document.getElementById("rickornot").style.color = "lightgreen";
-			document.getElementById("addToHistory").style.display = "";
-			break;
-		case -1:
-			document.getElementById("rickornot").innerHTML = "This isn't a valid YouTube URL!";
-			document.getElementById("rickornot").style.color = "white";
-			document.getElementById("addToHistory").style.display = "none";
-			break;
-		case -2:
-			document.getElementById("rickornot").innerHTML = "YouTube quota has been exceeded. Try again later.";
-			document.getElementById("rickornot").style.color = "purple";
-			document.getElementById("addToHistory").style.display = "none";
-			break;
-		case -3:
-			document.getElementById("rickornot").innerHTML = "An error has occurred! Cannot get the blacklist.";
-			document.getElementById("rickornot").style.color = "violet";
-			document.getElementById("addToHistory").style.display = "none";
-			break;
+	if (RickDetected < 0 || RickDetected == 1) {
+		document.getElementById("addToHistory").style.display = "none";
+	} else {
+		document.getElementById("addToHistory").style.display = "";
+	}
+	if (RickDetected == 1) addToHistory(ytID);
+	
+	if (RickDetected < 0) {
+		document.getElementById("rickornot").innerHTML = errorsMessages[-RickDetected - 1][0];
+		document.getElementById("rickornot").style.color = errorsMessages[-RickDetected - 1][1];
+	} else {
+		document.getElementById("rickornot").innerHTML = resultMessages[RickDetected][0];
+		document.getElementById("rickornot").style.color = resultMessages[RickDetected][1];
 	}
 }
