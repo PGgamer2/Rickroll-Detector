@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Rickroll Detector</title>
-<meta name="google-site-verification" content="lbKO1-t5ucQ8UszCjGSg0U7fsK_LlAGOPEgds0Tpoc4" />
-<meta name="title" content="Rickroll Detector">
-<meta name="description" content="Detect any rickroll link!">
-<meta name="keywords" content="rickroll rickrolling rick astley detector">
-<link rel="shortcut icon" sizes="256x256" href="favicon.ico"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-<style>
-* {font-family: 'Open Sans', sans-serif;}
-h1, p {color: white;}
-body {
-	background-color: black;
-	background-image: url("bg.jpg");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-}
-.content {
-	text-align: center;
-	margin-top: 10vh;
-}
-</style>
+	<title>Rickroll Detector</title>
+	<meta name="google-site-verification" content="lbKO1-t5ucQ8UszCjGSg0U7fsK_LlAGOPEgds0Tpoc4" />
+	<meta name="title" content="Rickroll Detector">
+	<meta name="description" content="Detect any rickroll link!">
+	<meta name="keywords" content="rickroll rickrolling rick astley detector">
+	<link rel="shortcut icon" sizes="256x256" href="favicon.ico"/>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<style>
+	* {
+		font-family: 'Open Sans', sans-serif;
+		font-size: min(2.5vw, 3vh);
+	}
+	h1, p {color: white;}
+	body {
+		background-color: black;
+		background-image: url("bg.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center;
+	}
+	.content {
+		text-align: center;
+		margin-top: 10vh;
+	}
+	#rickLinkInput {
+		width: 20em; 
+	}
+	</style>
 </head>
 <body>
-<form action="https://github.com/PGgamer2/Rickroll-Detector">
-	<input type="image" src="GitHub-Mark.png"/>
-</form>
-<div class="content">
-	<h1>Rickroll Detector</h1>
-	<input id="rickLinkInput" type="url"></input>
-	<button onclick="isThisArickroll(document.getElementById('rickLinkInput').value);">Is this a Rickroll?</button>
-	<p id="rickornot"></p>
-	<button style="display: none;" id="addToHistory" onclick="addToHistory(lastYTid);">Add url to your rickroll history</button>
-	<div style="margin-top: 50px;">
-		<p style="display: none;" id="rickrollhistoryLabel">Rickroll history:</p>
-		<div id="HistoryList"></div>
+	<form action="https://github.com/PGgamer2/Rickroll-Detector">
+		<input type="image" src="GitHub-Mark.png"/>
+	</form>
+	<div class="content">
+		<h1 style="font-size: 150%;">Rickroll Detector</h1>
+		<input id="rickLinkInput" type="url"></input>
+		<button onclick="isThisArickroll(document.getElementById('rickLinkInput').value);">Is this a Rickroll?</button>
+		<p id="rickornot"></p>
+		<button style="display: none;" id="addToHistory" onclick="addToHistory(lastYTid);">Add url to your rickroll history</button>
+		<div style="margin-top: 50px;">
+			<p style="display: none;" id="rickrollhistoryLabel">Rickroll history:</p>
+			<div id="HistoryList"></div>
+		</div>
 	</div>
-</div>
-<script src="rickrollHistory.js"></script>
-<script src="main.js"></script>
+	<script src="rickrollHistory.js"></script>
+	<script src="main.js"></script>
 </body>
 </html>

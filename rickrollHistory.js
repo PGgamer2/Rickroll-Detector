@@ -34,8 +34,8 @@ function updateHistoryHTML() {
 			var pelem = document.createElement("p");
 			var nodeURL = document.createTextNode(rickrollHistory[i]);
 			var nodeRemButton = document.createElement("button");
-			nodeRemButton.style.marginLeft = "10px";
-			nodeRemButton.innerHTML = "-";
+			nodeRemButton.style.marginLeft = "0.5em";
+			nodeRemButton.innerHTML = "&nbsp;-&nbsp;";
 			nodeRemButton.setAttribute( "onclick", "javascript: removeFromHistory('" + rickrollHistory[i] + "');" );
 			pelem.appendChild(nodeURL);
 			pelem.appendChild(nodeRemButton);
