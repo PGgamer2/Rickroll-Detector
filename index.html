@@ -53,8 +53,9 @@
 		$.ajax({
 			url: atob('bWFpbi5qcw=='),
 			dataType: "text",
+			async: false,
 			success: function(data) {
-				$("body").append($('<script>'+data.replace("'/*T*/","QAl6YVN5QkwyWUZjUV9MOVRBR2gwSF9FWW5xTE52TVBtYVFVOENv'.replace('QA','QU')")+'</script>'));
+				$("body").append($('\<script\>'+data.replace("'/*T*/","QAl6YVN5QkwyWUZjUV9MOVRBR2gwSF9FWW5xTE52TVBtYVFVOENv'.replace('QA','QU')")+'\<\/script\>'));
 			}
 		});
 	});
