@@ -1,4 +1,3 @@
-const YTapiKey = "QUl6YVN5QnRNVkdMcVgzemdvMWdLV3FTNE9naW1FLXM2TDhxbGtr";
 var RickDetected = 0;
 var lastYTid;
 
@@ -57,7 +56,7 @@ function isThisArickroll(rickLink) {
 		}
 		
 		if (RickDetected == 0) {
-			readJSONfile("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + rickYTid + "&key=" + atob(YTapiKey), function(callback) {
+			readJSONfile("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + rickYTid + "&key=" + atob(''/*T*/), function(callback) {
 				var videoInfos;
 				if (typeof(callback) != 'string') {
 					if (callback == 403) {
