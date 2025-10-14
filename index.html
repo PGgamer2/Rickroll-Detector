@@ -50,8 +50,13 @@
 	<script src="rickrollHistory.js"></script>
 	<script>
 	$(document).ready(function($) {
-		$.getScript(atob('bWFpbi5qcw=='), function(data) {
-			eval(data.replace("'/*T*/","QAl6YVN5QkwyWUZjUV9MOVRBR2gwSF9FWW5xTE52TVBtYVFVOENv'.replace('QA','QU')"));
+		$.ajax({
+			url: atob('bWFpbi5qcw=='),
+			dataType: "text",
+			async: false,
+			success: function(data) {
+				eval(data.replace("'/*T*/","QAl6YVN5QkwyWUZjUV9MOVRBR2gwSF9FWW5xTE52TVBtYVFVOENv'.replace('QA','QU')"));
+			}
 		});
 	});
 	</script>
